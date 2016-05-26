@@ -8,8 +8,6 @@ import {
 
 import Button from '../common/button';
 
-import Firebase from 'firebase';
-
 class SignIn extends React.Component {
 	constructor(props) {
 		super(props);
@@ -17,10 +15,9 @@ class SignIn extends React.Component {
 			username: '',
 			password: ''	
 		};
-		//var myFirebaseRef = new Firebase('https://authreactnativeudemy.firebaseio.com/');
-		var state = this.state;
-		console.log(Firebase('https://authreactnativeudemy.firebaseio.com/'));
-
+	}
+	componentDidMount() {
+		
 	}
 	render() {
 		return(
