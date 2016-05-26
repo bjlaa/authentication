@@ -8,14 +8,21 @@ import {
 
 import Button from '../common/button';
 
-module.exports = React.createClass({
-	getInitialState: function() {
-		return {
+import Firebase from 'firebase';
+
+class SignIn extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
 			username: '',
-			password: ''
+			password: ''	
 		};
-	},
-	render: function() {
+		//var myFirebaseRef = new Firebase('https://authreactnativeudemy.firebaseio.com/');
+		var state = this.state;
+		console.log(Firebase('https://authreactnativeudemy.firebaseio.com/'));
+
+	}
+	render() {
 		return(
 			<View style={styles.container}>
 				<Text>Sign In</Text>
@@ -35,15 +42,15 @@ module.exports = React.createClass({
 				<Button text={'Sign In'} onPress={this.onPress} />
 			</View>
 		)
-	},
-	onPress: function() {
+	}
+	onPress() {
 		// log the user in
 		this.setState({
 			password: ''
 		});
 
 	}
-});
+};
 
 const styles = StyleSheet.create({
 	container: {
@@ -65,3 +72,5 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 	}
 });
+
+export default SignIn;
