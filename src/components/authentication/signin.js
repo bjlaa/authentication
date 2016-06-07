@@ -6,6 +6,9 @@ import {
 	TextInput
 } from 'react-native';
 
+import Parse from 'parse/react-native';
+
+
 import Button from '../common/button';
 
 class SignIn extends React.Component {
@@ -17,7 +20,6 @@ class SignIn extends React.Component {
 		};
 	}
 	componentDidMount() {
-		
 	}
 	render() {
 		return(
@@ -36,14 +38,15 @@ class SignIn extends React.Component {
 				secureTextEntry={true} 
 				style={styles.input}
 				/>
-				<Button text={'Sign In'} onPress={this.onPress} />
+				<Button text={'Sign In'} onPress={this.onPress.bind(this)} />
 			</View>
 		)
 	}
+
 	onPress() {
-		// log the user in
-		this.setState({
-			password: ''
+		Parse.User.logIn(this.state.username, this.state.password, {
+			success: (user) => {console.log(user);},
+			error: (data, error) => {console.log(data, error);}
 		});
 
 	}
