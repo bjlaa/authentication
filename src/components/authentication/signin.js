@@ -16,7 +16,8 @@ class SignIn extends React.Component {
 		super(props);
 		this.state = {
 			username: '',
-			password: ''	
+			password: '',
+			errorMessage: '',	
 		};
 	}
 	componentDidMount() {
@@ -38,6 +39,7 @@ class SignIn extends React.Component {
 				secureTextEntry={true} 
 				style={styles.input}
 				/>
+				<Text style={styles.label}>{this.state.errorMessage}</Text>
 				<Button text={'Sign In'} onPress={this.onPress.bind(this)} />
 			</View>
 		)
@@ -46,7 +48,7 @@ class SignIn extends React.Component {
 	onPress() {
 		Parse.User.logIn(this.state.username, this.state.password, {
 			success: (user) => {console.log(user);},
-			error: (data, error) => {console.log(data, error);}
+			error: (data, error) => {this.setState({errorMessage: error.message}); }
 		});
 
 	}
