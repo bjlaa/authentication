@@ -1,24 +1,36 @@
 import React from 'react';
 import {
-	View,
-	Text,
-	StyleSheet
+	StyleSheet,
+	Navigator
 } from 'react-native';
 
 var Parse = require('parse/react-native');
 
 import Signin from './components/authentication/signin';
+import Signup from './components/authentication/signup';
+
+var ROUTES = {
+	signin : Signin,
+	signup: Signup,
+};
 
 module.exports = React.createClass({
 	componentWillMount: function() {
 		Parse.initialize('parseid');
 		Parse.serverURL = 'http://localhost:1337/parse';
 	}, 
+	renderScene: function(route, navigator) {
+		var Component = ROUTES[route.name];
+		return <Component route={route} navigator={navigator} />;
+	},
 	render: function() {
 		return (
-			<View style={styles.container}>
-				<Signin />
-			</View>
+			<Navigator 
+			style={styles.container}
+			initialRoute={{name: 'signin'}}
+			renderScene={this.renderScene}
+			configureScene={() => { return Navigator.SceneConfigs.FloatFromRight; }}
+			/>
 		);
 	}
 });
@@ -26,7 +38,5 @@ module.exports = React.createClass({
 var styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
 	}
 });

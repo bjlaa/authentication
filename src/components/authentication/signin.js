@@ -3,7 +3,7 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	TextInput
+	TextInput,
 } from 'react-native';
 
 import Parse from 'parse/react-native';
@@ -41,8 +41,12 @@ class SignIn extends React.Component {
 				/>
 				<Text style={styles.label}>{this.state.errorMessage}</Text>
 				<Button text={'Sign In'} onPress={this.onPress.bind(this)} />
+				<Button text={'I need an account...'} onPress={this.onSignupPress.bind(this)} />
 			</View>
 		)
+	}
+	onSignupPress() {
+		this.props.navigator.push({name: 'signup'});
 	}
 
 	onPress() {
